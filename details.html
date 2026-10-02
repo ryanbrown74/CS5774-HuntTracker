@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hunt Tracker</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+</head>
+<body class="details-page">
+
+ <!-- This page -->
+
+  <header id="header">
+
+    <div id="title-box">
+      <h1>Hunt Tracker</h1>
+    </div><!-- #title-box -->
+
+    <nav id="nav">
+      <ul id="primary-nav">
+        <li><a href="dashboard-list.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <form id="search-form" action="search-results.html" method="GET">
+        <input type="text" id="search-input" name="search" placeholder="deer">
+        <button type="submit" id="search-button">Search</button>
+      </form>
+
+      <div id="user-box">
+        <button><img src="images/user.png" alt="User Icon">Ryan</button>
+        <button onclick="window.location.href = 'landing.html';"><img src="images/logout.png" alt="Logout button"></button>
+      </div>
+    </nav>
+
+  </header><!-- #header -->
+
+  <div id="year-bar">
+      <ul id="year-list">
+        <li><a href="?year=2017">2017</a></li>
+        <li><a href="?year=2018">2018</a></li>
+        <li><a href="?year=2019">2019</a></li>
+        <li><a href="?year=2020">2020</a></li>
+        <li><a href="?year=2021">2021</a></li>
+        <li><a href="?year=2022">2022</a></li>
+        <li><a href="?year=2023">2023</a></li>
+        <li><a href="?year=2024">2024</a></li>
+        <li><a href="?year=2025">2025</a></li>
+        <li><a href="?year=all">All</a></li>
+
+      </ul>
+    </div>
+
+  <main id="content">
+    <div id="hunt-definition">
+      <div id="hunt-title-details">
+        <h2>Deer Hunt</h2>
+        <p class="harvest-status">Successful Harvest </p>
+        <p class="hunt-date">December 3rd, 2025 - Morning</p>
+        <p class="weather"><img src="images/sun.png" alt="Sun icon">43° Sunny - No wind</p>
+        <!-- Sun image from: https://www.istockphoto.com/illustrations/sun-clipart -->
+        <p class="hunt-location">Woodhull, NY</p>
+      </div> <!-- hunt-title-details-->
+
+      <a href="edit.html" id="edit-button">Edit</a>
+
+      <div id="hunt-images">
+        <img src="images/hunt1.png" alt="Hunt 1" class="featured-image">
+        <div class="thumbnail-row">
+          <img src="images/hunt2.png" alt="Hunt 2" class="thumbnail">
+          <img src="images/hunt3.png" alt="Hunt 3" class="thumbnail">
+          <img src="images/hunt4.png" alt="Hunt 4" class="thumbnail">
+          <img src="images/hunt5.png" alt="Hunt 5" class="thumbnail">
+          <img src="images/map1.png" alt="Hunt Map" class="thumbnail">
+        </div>
+      </div> <!-- hunt-images-->
+    </div>
+
+    <div id="hunt-details">
+      <div id="details-column">
+        <div class="form-row">
+          <label for="game-species">Game Species:</label>
+          <input type="text" id="game-species" value="White-tail Deer" readonly>
+        </div>
+        <div class="form-row">
+          <label for="method">Method:</label>
+          <input type="text" id="method" value="Firearms" readonly>
+        </div>
+        <div class="form-row">
+          <label for="caliber">Caliber:</label>
+          <input type="text" id="caliber" value="308 Winchester" readonly>
+        </div>
+        <div class="form-row">
+          <label for="ammo">Ammo:</label>
+          <input type="text" id="ammo" value="Federal Fusion - 150 grain" readonly>
+        </div>
+        <div class="form-row">
+          <label for="distance">Distance:</label>
+          <input type="text" id="distance" value="150 yards" readonly>
+        </div>
+        <div class="form-row">
+          <label for="setup">Setup:</label>
+          <input type="text" id="setup" value="Tree Stand" readonly>
+        </div>
+        <div class="form-row">
+          <label for="companions">Companions:</label>
+          <input type="text" id="companions" value="None" readonly>
+        </div>
+        <div class="form-row">
+          <label for="gear-used">Gear Used:</label>
+          <textarea readonly id="gear-used" placeholder="List gear used during the hunt">Parka; Binoculars; Range Finder; Scent Killer</textarea>
+        </div>
+        <div class="form-row">
+          <label for="gear-needed">Gear Needed:</label>
+          <textarea readonly id="gear-needed" placeholder="List gear needed for the hunt">Bipod; Sling</textarea>
+        </div>
+      </div>
+      <div id="notes-column">
+        <label for="notes">Notes:</label>
+        <textarea readonly id="notes" placeholder="This hunt was exciting as there were a ton of deer throughout the time we were out. Didn't get a shot on a buck until late in the morning, but it was a perfect shot that made for a short track."></textarea>
+      </div>
+      <div id="details-buttons"> <!-- Not currently implemented as there are only placeholder details for one hunt. -->
+        <button id="previous-button">Previous</button>
+        <button id="next-button">Next</button>
+      </div>
+    </div> <!-- hunt-details -->
+
+  </main> <!-- content -->
+
+  <footer id="footer">
+      <p id="copyright">©2026 Brown LLC</p>
+      <ul id="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+  </footer>
+
+</body>
+</html>

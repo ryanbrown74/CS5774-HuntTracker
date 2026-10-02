@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hunt Tracker - Search Results</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+</head>
+<body>
+
+  <header id="header">
+
+    <div id="title-box">
+      <h1>Hunt Tracker</h1>
+    </div><!-- #title-box -->
+
+    <nav id="nav">
+      <ul id="primary-nav">
+        <li><a href="dashboard-list.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <form id="search-form" action="search-results.html" method="GET">
+        <input type="text" id="search-input" name="search" placeholder="deer">
+        <button type="submit" id="search-button">Search</button>
+      </form>
+
+      <div id="user-box">
+        <button><img src="images/user.png" alt="User Icon">Ryan</button>
+        <button onclick="window.location.href = 'landing.html';"><img src="images/logout.png" alt="Logout button"></button>
+      </div>
+    </nav>
+
+  </header><!-- #header -->
+
+  <div id="view-bar">
+    <h2 id="search-results-title">Search Results</h2>
+  </div>
+
+  <main id="content">
+
+    <div id="hunt-list">
+      <a href="details.html" class="hunt">
+          <div class="major-details">
+            <h2 class="hunt-title">Deer Hunt</h2>
+            <p class="harvest-status">Successful Harvest </p>
+            <p class="hunt-date">December 3rd</p>
+            <p class="hunt-location">Woodhull, NY</p>
+        </div>
+          <div class="featured-image">
+            <img src="images/hunt1.png" alt="Hunt 1">
+          </div>
+      </a>
+
+      <a href="details.html" class="hunt">
+        <div class="major-details">
+          <h2 class="hunt-title">Deer Hunt</h2>
+          <p class="harvest-status">Unsuccessful Harvest </p>
+          <p class="hunt-date">September 14th</p>
+          <p class="hunt-location">Woodhull, NY</p>
+        </div>
+        <div class="featured-image">
+            <img src="images/hunt2.png" alt="Hunt 2">
+          </div>
+      </a>
+    </div> <!-- hunt-list -->
+
+    <div id="no-results">
+      <h2> No Results Found.</h2>
+      <p>Please try a different search term.</p>
+    </div>
+
+  </main> <!-- content -->
+
+  <footer id="footer">
+      <p id="copyright">©2026 Brown LLC</p>
+      <ul id="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+  </footer>
+
+</body>
+</html>

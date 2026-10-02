@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hunt Tracker</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+</head>
+<body class="landing-page">
+
+<!-- This page is the landing page that a user first sees when visiting the URL. -->
+
+  <header id="header">
+    <div id="title-box">
+        <h1> Hunt Tracker </h1>
+    </div><!-- #title-box -->
+
+    <nav id="nav">
+        <ul id="primary-nav">
+            <li><a href="#" class="selected">Login</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+  </header><!-- #header -->
+
+  <main id="content">
+      <div id="login-center">
+          <!-- Logo designed by me in Microsoft Paint -->
+          <img id="main-logo" src="images/logo.png" alt="Hunt Tracker Logo">
+          <h2 id="slogan">Record your hunting history.</h2>
+          <form id="login-box">
+              <label for="username" class="hidden">Username:</label>
+              <input type="text" id="username" name="username" placeholder="Username">
+              <br>
+              <label for="pw" class="hidden">Password:</label>
+              <input type="password" id="pw" name="pw" placeholder="Password">
+              <input id="login-button" type="submit" name="submit" value="Log in"> or <a href="dashboard-list.html">Register</a>
+          </form>
+      </div>
+  </main>
+
+  <footer id="footer">
+      <p id="copyright">©2026 Brown LLC</p>
+      <ul id="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+  </footer>
+
+  <!-- Login button takes user to dashboard-list.html for now -->
+  <script>
+      document.getElementById("login-button").addEventListener("click", function(event) {
+          event.preventDefault();
+        window.location.href = "dashboard-list.html";
+        });
+  </script>
+</body>
+</html>

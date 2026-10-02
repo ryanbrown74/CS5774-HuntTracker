@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hunt Tracker - Create New Hunt</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+</head>
+<body>
+
+<!-- This page allows users to create new hunt logs -->
+
+  <header id="header">
+
+    <div id="title-box">
+      <h1>Hunt Tracker</h1>
+    </div><!-- #title-box -->
+
+    <nav id="nav">
+      <ul id="primary-nav">
+        <li><a href="dashboard-list.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <form id="search-form" action="search-results.html" method="GET">
+        <input type="text" id="search-input" name="search" placeholder="deer">
+        <button type="submit" id="search-button">Search</button>
+      </form>
+
+      <div id="user-box">
+        <button><img src="images/user.png" alt="User Icon">Ryan</button>
+        <button onclick="window.location.href = 'landing.html';"><img src="images/logout.png" alt="Logout button"></button>
+      </div>
+    </nav>
+
+  </header><!-- #header -->
+
+  <main id="content">
+
+    <div id="new-hunt-details">
+      <div class="form-row">
+        <label for="hunt-title">Title:</label>
+        <input type="text" id="hunt-title" name="hunt-title" placeholder="Give your hunt a name">
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-success">Successful:</label>
+        <input type="checkbox" id="hunt-success" name="hunt-success">
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-date">Date:</label>
+        <input type="date" id="hunt-date" name="hunt-date">
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-time">Time:</label>
+        <select id="hunt-time" name="hunt-time">
+          <option value="">Select time</option>
+          <option value="Night">Night</option>
+          <option value="Dusk">Dusk</option>
+          <option value="Day">Day</option>
+          <option value="Dawn">Dawn</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-location">Location:</label>
+        <input type="text" id="hunt-location" name="hunt-location" placeholder="Woodhull, NY">
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-weather">Weather:</label>
+        <select id="hunt-weather" name="hunt-weather">
+          <option value="">Select weather</option>
+          <option value="Sun">Sun</option>
+          <option value="Cloudy">Cloudy</option>
+          <option value="Rain">Rain</option>
+          <option value="Snow">Snow</option>
+          <option value="Hail">Hail</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-wind">Wind:</label>
+        <input type="checkbox" id="hunt-wind" name="hunt-wind">
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-temp">Temperature:</label>
+        <div class="temp-input-group">
+          <input type="text" id="hunt-temp" name="hunt-temp" placeholder="60">
+          <fieldset id="temp-units-fieldset">
+            <legend class="hidden">Temperature Units</legend>
+            <div class="radio-group">
+              <label for="temp-scale-f">F&deg;</label>
+              <input type="radio" id="temp-scale-f" name="temp-scale" value="F">
+              <label for="temp-scale-c">C&deg;</label>
+              <input type="radio" id="temp-scale-c" name="temp-scale" value="C">
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-game">Game:</label>
+        <select id="hunt-game" name="hunt-game">
+          <option value="">Select game</option>
+          <option value="White-tail Deer">White-tail Deer</option>
+          <option value="Rabbit">Rabbit</option>
+          <option value="Bear">Bear</option>
+          <option value="Elk">Elk</option>
+          <option value="Moose">Moose</option>
+          <option value="Wolf">Wolf</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Duck">Duck</option>
+          <option value="Bobcat">Bobcat</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-method">Method:</label>
+        <select id="hunt-method" name="hunt-method">
+          <option value="">Select method</option>
+          <option value="Firearm">Firearm</option>
+          <option value="Bow">Bow</option>
+          <option value="Trap">Trap</option>
+        </select>
+      </div>
+
+      <div id="firearm-fields">
+        <div class="form-row">
+          <label for="hunt-caliber">Caliber:</label>
+          <select id="hunt-caliber" name="hunt-caliber">
+            <option value="">Select caliber</option>
+            <option value=".22">.22</option>
+            <option value=".243">.243</option>
+            <option value=".308">.308 Winchester</option>
+            <option value=".357">.357</option>
+            <option value=".45">.45</option>
+            <option value="10mm">10mm</option>
+            <option value="12mm">12mm</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="hunt-ammo">Ammo:</label>
+          <select id="hunt-ammo" name="hunt-ammo">
+            <option value="">Select ammo</option>
+            <option value="Federal">Federal Fusion</option>
+            <option value="Winchester">Winchester</option>
+            <option value="Bulletproof">Bulletproof</option>
+            <option value="Ballistic">Ballistic</option>
+            <option value="Pellets">Pellets</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="hunt-bullet-weight">Bullet Weight:</label>
+          <select id="hunt-bullet-weight" name="hunt-bullet-weight">
+            <option value="">Select bullet weight</option>
+            <option value="100">100 grain</option>
+            <option value="110">110 grain</option>
+            <option value="120">120 grain</option>
+            <option value="130">130 grain</option>
+            <option value="140">140 grain</option>
+            <option value="150">150 grain</option>
+            <option value="160">160 grain</option>
+            <option value="170">170 grain</option>
+            <option value="180">180 grain</option>
+            <option value="190">190 grain</option>
+            <option value="200">200 grain</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="bow-fields" style="display: none;">
+        <div class="form-row">
+          <label for="hunt-bow-type">Bow Type:</label>
+          <select id="hunt-bow-type" name="hunt-bow-type">
+            <option value="">Select bow type</option>
+            <option value="Compound">Compound</option>
+            <option value="Recurve">Recurve</option>
+            <option value="Long Bow">Long Bow</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="hunt-arrow-length">Arrow Length (inches):</label>
+          <input type="text" id="hunt-arrow-length" name="hunt-arrow-length" placeholder="28">
+        </div>
+
+        <div class="form-row">
+          <label for="hunt-arrow-head">Arrow Head:</label>
+          <select id="hunt-arrow-head" name="hunt-arrow-head">
+            <option value="">Select arrow head</option>
+            <option value="Field Points">Field Points</option>
+            <option value="Bullet Points">Bullet Points</option>
+            <option value="Fixed Broadhead">Fixed Broadhead</option>
+            <option value="Mechanical Broadhead">Mechanical Broadhead</option>
+            <option value="Bevel">Bevel</option>
+            <option value="Blunt">Blunt</option>
+            <option value="Judo">Judo</option>
+            <option value="Guillotine">Guillotine</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-distance">Distance:</label>
+        <input type="text" id="hunt-distance" name="hunt-distance" placeholder="150">
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-distance-units">Units:</label>
+        <select id="hunt-distance-units" name="hunt-distance-units">
+          <option value="">Select units</option>
+          <option value="feet">Feet</option>
+          <option value="yards">Yards</option>
+          <option value="meters">Meters</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-setup">Setup:</label>
+        <select id="hunt-setup" name="hunt-setup">
+          <option value="">Select setup</option>
+          <option value="tree-stand">Tree Stand</option>
+          <option value="blind">Blind</option>
+          <option value="stalk">Stalk</option>
+          <option value="drive-hunt">Drive Hunt</option>
+          <option value="spot-and-stalk">Spot and Stalk</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-companions">Companions:</label>
+        <input type="text" id="hunt-companions" name="hunt-companions" placeholder="Enter companions">
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-gear-used">Gear Used:</label>
+        <input list="hunt-gear-used-options" id="hunt-gear-used" name="hunt-gear-used" placeholder="Parka; Binoculars; Range Finder; Scent Killer">
+        <datalist id="hunt-gear-used-options">
+          <option value="Bow">
+          <option value="Bow Quiver">
+          <option value="Bow Sight">
+          <option value="Bow String">
+          <option value="Crossbow">
+          <option value="Crossbow Quiver">
+          <option value="Crossbow Sight">
+          <option value="Crossbow String">
+          <option value="Bipod">
+          <option value="Sling">
+          <option value="Parka">
+          <option value="Jacket">
+          <option value="Pants">
+          <option value="Shirt">
+          <option value="Shoes">
+          <option value="Socks">
+          <option value="Hat">
+          <option value="Gloves">
+          <option value="Ear Plugs">
+          <option value="Binoculars">
+          <option value="Range Finder">
+          <option value="Scent Killer">
+        </datalist>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-gear-needed">Gear Needed:</label>
+        <input list="hunt-gear-needed-options" id="hunt-gear-needed" name="hunt-gear-needed" placeholder="Bipod; Sling">
+        <datalist id="hunt-gear-needed-options">
+          <option value="Bow">
+          <option value="Bow Quiver">
+          <option value="Bow Sight">
+          <option value="Bow String">
+          <option value="Crossbow">
+          <option value="Crossbow Quiver">
+          <option value="Crossbow Sight">
+          <option value="Crossbow String">
+          <option value="Bipod">
+          <option value="Sling">
+          <option value="Parka">
+          <option value="Jacket">
+          <option value="Pants">
+          <option value="Shirt">
+          <option value="Shoes">
+          <option value="Socks">
+          <option value="Hat">
+          <option value="Gloves">
+          <option value="Ear Plugs">
+          <option value="Binoculars">
+          <option value="Range Finder">
+          <option value="Scent Killer">
+        </datalist>
+      </div>
+
+      <div class="form-row">
+        <label for="hunt-notes">Notes:</label>
+        <textarea id="hunt-notes" name="hunt-notes" rows="10" cols="50" placeholder="Add any additional notes"></textarea>
+      </div>
+
+      <div class="form-buttons">
+        <button id="save-button">Save</button>
+        <button onclick="window.location.href = 'dashboard-list.html';" id="cancel-button">Cancel</button>
+      </div>
+
+    </div> <!-- new-hunt-details-->
+
+    <div id="images-and-map-column">
+      <button id="add-images-button">Add Images</button>
+      <div id="hunt-images">
+        <div class="image-placeholder featured-image-placeholder">
+          <span>No featured image</span>
+        </div>
+        <div class="thumbnail-row">
+          <div class="image-placeholder thumbnail-placeholder"><span>No image</span></div>
+          <div class="image-placeholder thumbnail-placeholder"><span>No image</span></div>
+          <div class="image-placeholder thumbnail-placeholder"><span>No image</span></div>
+          <div class="image-placeholder thumbnail-placeholder"><span>No image</span></div>
+        </div>
+      </div>
+      <button id="add-map-button">Add Map</button>
+      <div id="added-map">
+        <div class="image-placeholder map-placeholder">
+          <span>No map added</span>
+        </div>
+      </div>
+
+    </div> <!-- images-and-map-column -->
+
+  </main> <!-- content -->
+
+  <footer id="footer">
+      <p id="copyright">©2026 Brown LLC</p>
+      <ul id="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+  </footer>
+
+</body>
+</html>

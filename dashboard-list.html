@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hunt Tracker</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+</head>
+<body>
+
+<!-- This page is the list view of hunts -->
+
+  <header id="header">
+
+    <div id="title-box">
+      <h1>Hunt Tracker</h1>
+    </div><!-- #title-box -->
+
+    <nav id="nav">
+      <ul id="primary-nav">
+        <li><a href="#" class="selected">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <form id="search-form" action="search-results.html" method="GET">
+        <input type="text" id="search-input" name="search" placeholder="deer">
+        <button type="submit" id="search-button">Search</button>
+      </form>
+
+      <div id="user-box">
+        <button><img src="images/user.png" alt="User Icon">Ryan</button>
+        <button onclick="window.location.href = 'landing.html';"><img src="images/logout.png" alt="Logout button"></button>
+      </div>
+    </nav>
+
+  </header><!-- #header -->
+
+  <div id="year-bar">
+    <ul id="year-list">
+      <li><a href="?year=2017">2017</a></li>
+      <li><a href="?year=2018">2018</a></li>
+      <li><a href="?year=2019">2019</a></li>
+      <li><a href="?year=2020">2020</a></li>
+      <li><a href="?year=2021">2021</a></li>
+      <li><a href="?year=2022">2022</a></li>
+      <li><a href="?year=2023">2023</a></li>
+      <li><a href="?year=2024">2024</a></li>
+      <li><a href="?year=2025" class="selected">2025</a></li>
+      <li><a href="?year=all">All</a></li>
+    </ul>
+  </div>
+
+  <div id="view-bar">
+    <ul id="view-buttons">
+      <li><a href="#" class="selected">List View</a></li>
+      <li><a href="dashboard-map.html">Map View</a></li>
+    </ul>
+  </div>
+
+  <main id="content">
+
+    <div id="hunt-list">
+      <a href="details.html" class="hunt">
+          <div class="major-details">
+            <h2 class="hunt-title">Deer Hunt</h2>
+            <p class="harvest-status">Successful Harvest </p>
+            <p class="hunt-date">December 3rd</p>
+            <p class="hunt-location">Woodhull, NY</p>
+        </div>
+          <div class="featured-image">
+            <img src="images/hunt1.png" alt="Hunt 1">
+          </div>
+      </a>
+
+      <a href="details.html" class="hunt">
+        <div class="major-details">
+          <h2 class="hunt-title">Deer Hunt</h2>
+          <p class="harvest-status">Unsuccessful Harvest </p>
+          <p class="hunt-date">September 14th</p>
+          <p class="hunt-location">Woodhull, NY</p>
+        </div>
+        <div class="featured-image">
+            <img src="images/hunt2.png" alt="Hunt 2">
+          </div>
+      </a>
+
+      <a href="details.html" class="hunt">
+        <div class="major-details">
+          <h2 class="hunt-title">Black Bear Hunt</h2>
+          <p class="harvest-status">Unsuccessful Harvest </p>
+          <p class="hunt-date">September 10th</p>
+          <p class="hunt-location">Woodhull, NY</p>
+        </div>
+        <div class="featured-image">
+          <img src="images/bear.png" alt="Hunt 3">
+        </div>
+      </a>
+
+      <div id="create-new">
+        <button onclick="window.location.href = 'create.html'" id="create-new-button"><img src="images/add.png" alt="Add new hunt"></button>
+        <h3>Create New</h3>
+      </div>
+    </div> <!-- hunt-list -->
+
+  </main> <!-- content -->
+
+  <footer id="footer">
+      <p id="copyright">©2026 Brown LLC</p>
+      <ul id="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+  </footer>
+
+</body>
+</html>

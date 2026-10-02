@@ -1,0 +1,762 @@
+html, body{
+    /*height: 100%;*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/*********************************/
+/**** HEADER *********************/
+/*********************************/
+header{
+    background-color: olive;
+}
+
+div#title-box{
+    float: none;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+    font-family: 'Rog Fonts', Arial, sans-serif;
+    text-align: center;
+}
+
+nav#nav{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #dcdcdc;
+}
+
+ul#primary-nav{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: left;
+}
+
+ul#primary-nav li{
+    margin: 10px;
+}
+
+ul#primary-nav li a{
+    text-decoration: none;
+    color: black;
+    padding: 5px
+}
+
+ul#primary-nav li a:hover{
+    text-decoration: underline;
+    background-color: orange;
+}
+
+div#user-box{
+    float: right;
+}
+
+div#no-results{
+    display: none;
+    margin : 20px;
+}
+
+
+#search-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 20px;
+}
+
+#search-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#search-button {
+    padding: 5px 15px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#search-button:hover {
+    background-color: #1565C0;
+}
+
+/*********************************/
+/**** MAIN ***********************/
+/*********************************/
+/*landing.html*/
+body.landing-page main#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+div#login-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    flex-direction: column;
+}
+
+h2#slogan{
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+}
+
+div#login-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30% 10%;
+    flex-direction: column;
+}
+
+input#login-button {
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+/*add.html,edit.html*/
+main#content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /*padding: 20px;*/
+    align-items: flex-start;
+}
+
+#new-hunt-details, #images-and-map-column {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#new-hunt-details {
+    flex: 1;
+}
+
+#add-images-button,
+#add-map-button {
+    width: fit-content;
+}
+
+/*details.html*/
+#year-bar{
+    width: 100%;
+    background-color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc;
+}
+
+body.details-page main#content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+#year-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#year-list li a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+}
+
+#year-list li a:hover {
+    background-color: orange;
+    color: white;
+    border-color: orange;
+}
+
+#year-list li a.selected {
+    background-color: orange;
+    border-radius: 10px;
+}
+
+#hunt-definition {
+    width : 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    background-color: white;
+    padding-top: 10px;
+    padding-left: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+#hunt-details {
+    width : 100%;
+    background-color: white;
+    padding-left: 20px;
+    padding-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    position: relative;
+}
+
+#details-column{
+    display : flex;
+    flex-direction: column;
+    margin-right : 50px;
+    gap: 10px;
+}
+
+#details-column div{
+    margin: 0;
+}
+
+#details-column textarea{
+    width: 100%;
+    height: 100px;
+}
+
+#notes-column{
+    display : flex;
+    flex-direction: column;
+    justify-content: right;
+}
+
+#notes-column textarea{
+    width: 300px;
+    height: 500px;
+}
+
+#details-buttons {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+#previous-button,
+#next-button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #2196F3;
+    color: black;
+    font-size: 14px;
+}
+
+#back-button:hover,
+#next-button:hover {
+    border: 1px solid black;
+}
+
+.weather img {
+    width: 30px;
+    height: 30px;
+}
+
+#hunt-title-details {
+    flex: 2;
+}
+
+#hunt-definition img.edit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+#hunt-images {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+
+#edit-button {
+    width: 50px;
+    height : 30px;
+    background-color: #1565C0;
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#hunt-wind {
+    width : 20px;
+    text-align: left;
+    margin : 0;
+}
+
+#hunt-temp {
+    width : 60px;
+    text-align: left;
+    margin : 0;
+}
+
+.temp-input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#temp-units-fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+#images-and-map-column {
+    flex: 1;
+}
+
+#hunt-images {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#hunt-images .featured-image {
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+#add-map-button {
+    margin-bottom : 10px;
+    margin-top : 50px;
+}
+
+.featured-image {
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.thumbnail-row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    order: 1;
+}
+
+.thumbnail {
+    flex: 1;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: 2px dashed black;
+    border-radius: 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+.image-placeholder span {
+    text-align: center;
+}
+
+.featured-image-placeholder {
+    width: auto;
+    height: auto;
+    min-height: 200px;
+    margin-bottom: 10px;
+}
+
+.thumbnail-placeholder {
+    flex: 1;
+    height: 80px;
+}
+
+.map-placeholder {
+    width: 100%;
+    min-height: 200px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.form-row label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+}
+
+.radio-group label {
+    font-weight: normal;
+    margin: 0 0 0 10px;
+}
+
+.radio-group input {
+    margin-right: 15px;
+}
+
+#hunt-success {
+    width : 20px;
+    text-align: left;
+    margin : 0;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-buttons button:hover {
+    border: 1px solid black;
+}
+
+#save-button {
+    background-color: #2A6D35;
+    color: white;
+}
+
+
+#cancel-button {
+    background-color: orange;
+    color: black;
+}
+
+#delete-button {
+    background-color: red;
+    color: black;
+}
+
+/* dashboard-list.html */
+#view-bar {
+    width: 100%;
+    background-color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc;
+}
+
+#search-results-title {
+    margin: 0;
+    padding-left: 20px;
+    color: #333;
+}
+
+#hunt-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hunt,
+#create-new,
+.selected-map-hunt {
+    display: flex;
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+a.hunt {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.selected-map-hunt {
+    text-decoration: none;
+    color: inherit;
+}
+
+.major-details p,
+.major-details h2 {
+    margin: 0;
+}
+
+.major-details .hunt-title{
+    margin-bottom: 30px;
+}
+
+.hunt:hover,
+.selected-map-hunt:hover{
+    border: 2px solid orange;
+}
+
+.major-details {
+    flex: 1;
+}
+
+.hunt .featured-image {
+    order: 1;
+    max-height: 100%;
+    margin-left: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-image img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+#create-new{
+    justify-content: center;
+    align-items: center;
+}
+
+#create-new button {
+    background-color: white;
+    height: 60px;
+    width: 60px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#create-new-button:hover{
+    border : 2px orange solid;
+}
+
+#view-buttons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#view-buttons li a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+}
+
+#view-buttons li a:hover {
+    background-color: orange;
+    color: white;
+    border-color: orange;
+}
+
+#view-buttons li a.selected {
+    background-color: orange;
+    border-radius: 10px;
+}
+
+/* dashboard-map.html */
+body.map-page main#content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+#map {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#map img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.map-marker {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-shadow: 1px 1px 2px white;
+}
+
+.add-new-map-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 8px 16px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.add-new-map-button:hover {
+    border: 1px solid orange;
+}
+
+.selected-marker {
+    color: black;
+    border: 2px solid black;
+}
+
+.selected-map-hunt {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+/****************/
+/**** FOOTER ****/
+/****************/
+footer#footer{
+    display: flex;
+    justify-content: space-between;
+    background-color: #dcdcdc;
+}
+
+p#copyright{
+    text-align: right;
+}
+
+ul#footer-links{
+    text-align: right;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+ul#footer-links li a{
+    text-decoration: none;
+    color: black;
+}
+
+ul#footer-links li a:hover{
+    text-decoration: underline;
+    color: orange;
+}
+
+/*****************/
+/**** GENERAL ****/
+/*****************/
+/* Hide labels while remaining accessible for screen readers */
+.hidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+a.selected{
+    background-color: white;
+    border-radius: 10px;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.page-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px;
+}
+
+.page-content h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.page-content p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
