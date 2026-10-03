@@ -48,10 +48,10 @@ function handleReferrer() {
         link.addEventListener('click', function(e) {
             const referrerPage = sessionStorage.getItem('referrerPage');
             console.log('Clicking Home, referrerPage from storage:', referrerPage);
-            if (referrerPage === 'landing.html') {
-                console.log('Redirecting to landing.html');
+            if (referrerPage === 'index.html') {
+                console.log('Redirecting to index.html');
                 e.preventDefault();
-                window.location.href = 'landing.html';
+                window.location.href = 'index.html';
             }
         });
     });
@@ -120,6 +120,7 @@ function handleMethodChange() {
     });
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // Function to save hunt data to localStorage
 function saveHunt() {
     const hunt = {
@@ -158,6 +159,7 @@ function saveHunt() {
     window.location.href = 'dashboard-list.html';
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // Function to load hunts from localStorage and display in dashboard-list.html
 function loadHunts() {
     const huntList = document.getElementById('hunt-list');
@@ -186,7 +188,7 @@ function loadHunts() {
                 <p class="hunt-location">${hunt.location || 'No location'}</p>
             </div>
             <div class="featured-image">
-                <img src="images/new-hunt${hunts.length - 1}.png" alt="Hunt ${index + 1}">
+                <img src="images/new-hunt${index}.png" alt="Hunt ${index + 1}">
                 <img src="images/missing.png" alt="Hunt ${index + 1}">
             </div>
         `;
