@@ -1,59 +1,57 @@
 // Initialize functions on document ready
 $(document).ready(function() {
-    if (window.location.pathname.includes('about.html') ||
-        window.location.pathname.includes('contact.html')) {
-        handleReferrer();
+    const pathname = window.location.pathname;
+    
+    if (pathname.includes('about.html') ||
+        pathname.includes('contact.html')) {
+        handleHomeClick();
     }
     
-    if (window.location.pathname.includes('search-results.html')) {
+    if (pathname.includes('search-results.html')) {
         handleSearchResults();
     }
     
-    if (window.location.pathname.includes('create.html')) {
-        handleCreateHunt();
+    if (pathname.includes('create.html')) {
         handleMethodChange();
+        handleLogout();
+        handleCancel();
     }
 
-    if (window.location.pathname.includes('edit.html')) {
+    if (pathname.includes('edit.html')) {
         handleMethodChange();
+        handleLogout();
     }
     
-    if (window.location.pathname.includes('dashboard-list.html')) {
-        loadHunts();
+    if (pathname.includes('dashboard-list.html') || pathname.includes('dashboard-list')) {
+        handleLogout();
+        handleCreateNew();
+        handleSearchForm();
     }
 });
 //---------------------------------------------------------------------------------------------------------------------
-// Function to handle referrer tracking and conditional redirection on Home link clicks
-function handleReferrer() {
-    const referrer = document.referrer;
-    console.log('Referrer:', referrer);
-    if (referrer) {
-        // Extract the filename from the URL
-        const urlParts = referrer.split('/');
-        let filename = urlParts[urlParts.length - 1] || 'home';
+// Function to handle referrer tracking and conditional redirection on Home link clicks from certain pages
+function handleHomeClick() {
+    // Handle Home link click using jQuery
+    $('a[href="dashboard-list.html"]').on('click', function(e) {
+        console.log('Home link clicked');
+        console.log('window.pb available:', !!window.pb);
 
-        // Remove any query parameters
-        filename = filename.split('?')[0];
-        console.log('Extracted filename:', filename);
+        // Check if user is logged in using PocketBase authStore
+        let isLoggedIn = false;
+        if (window.pb) {
+            isLoggedIn = window.pb.authStore.isValid;
+            console.log('authStore.token:', window.pb.authStore.token);
+            console.log('authStore.model:', window.pb.authStore.model);
+        }
+        console.log('isLoggedIn:', isLoggedIn);
 
-        // Save the referrer to sessionStorage
-        sessionStorage.setItem('referrerPage', filename);
-        console.log('Saved to sessionStorage:', filename);
-    }
-    
-    // Handle Home link click
-    const homeLinks = document.querySelectorAll('a[href="dashboard-list.html"]');
-    console.log('Found home links:', homeLinks.length);
-    homeLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const referrerPage = sessionStorage.getItem('referrerPage');
-            console.log('Clicking Home, referrerPage from storage:', referrerPage);
-            if (referrerPage === 'index.html') {
-                console.log('Redirecting to index.html');
-                e.preventDefault();
-                window.location.href = 'index.html';
-            }
-        });
+        if (!isLoggedIn) {
+            console.log('Not logged in, redirecting to index.html');
+            e.preventDefault();
+            window.location.href = 'index.html';
+        } else {
+            console.log('Logged in, going to dashboard-list.html');
+        }
     });
 }
 
@@ -62,141 +60,116 @@ function handleReferrer() {
 function handleSearchResults() {
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('search');
-    const huntList = document.getElementById('hunt-list');
-    const noResults = document.getElementById('no-results');
+    const $huntList = $('#hunt-list');
+    const $noResults = $('#no-results');
     
     if (searchQuery && searchQuery.toLowerCase() === 'deer') {
-        huntList.style.display = 'flex';
-        noResults.style.display = 'none';
+        $huntList.css('display', 'flex');
+        $noResults.css('display', 'none');
     } else {
-        huntList.style.display = 'none';
-        noResults.style.display = 'block';
+        $huntList.css('display', 'none');
+        $noResults.css('display', 'block');
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// Function to handle creating a new hunt from create.html using event delegation
-function handleCreateHunt() {
-    const formContainer = document.getElementById('new-hunt-details');
-    if (!formContainer) {
-        return;
-    }
-
-    formContainer.addEventListener('click', function(e) {
-        if (e.target.id === 'save-button') {
-            e.preventDefault();
-            saveHunt();
-        }
-    });
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// Function to handle Method dropdown change event to show/hide fields
+//Function to handle Method dropdown change event to show/hide fields
 function handleMethodChange() {
-    const methodSelect = document.getElementById('hunt-method');
-    if (!methodSelect) {
-        return;
-    }
-
-    methodSelect.addEventListener('change', function() {
-        const selectedMethod = this.value;
-        
-        // Use DOM traversal to find the firearm-fields and bow-fields divs
-        // that are siblings of the method select's parent
-        const methodRow = this.closest('.form-row');
-        const firearmFields = methodRow.nextElementSibling;
-        const bowFields = firearmFields.nextElementSibling;
-        
-        if (selectedMethod === 'Firearm') {
-            firearmFields.style.display = 'block';
-            bowFields.style.display = 'none';
-        } else if (selectedMethod === 'Bow') {
-            firearmFields.style.display = 'none';
-            bowFields.style.display = 'block';
+    $('#hunt-method').on('change', function() {
+        const method = $(this).val();
+        if (method === 'Firearm') {
+            $('#firearm-fields').show();
+            $('#bow-fields').hide();
+        } else if (method === 'Bow') {
+            $('#firearm-fields').hide();
+            $('#bow-fields').show();
         } else {
-            firearmFields.style.display = 'none';
-            bowFields.style.display = 'none';
+            $('#firearm-fields').hide();
+            $('#bow-fields').hide();
         }
     });
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// Function to save hunt data to localStorage
-function saveHunt() {
-    const hunt = {
-        title: document.getElementById('hunt-title').value,
-        success: document.getElementById('hunt-success').checked,
-        date: document.getElementById('hunt-date').value,
-        time: document.getElementById('hunt-time').value,
-        location: document.getElementById('hunt-location').value,
-        weather: document.getElementById('hunt-weather').value,
-        wind: document.getElementById('hunt-wind').checked,
-        temp: document.getElementById('hunt-temp').value,
-        tempScale: document.querySelector('input[name="temp-scale"]:checked')?.value || 'F',
-        game: document.getElementById('hunt-game').value,
-        method: document.getElementById('hunt-method').value,
-        caliber: document.getElementById('hunt-caliber')?.value || '',
-        ammo: document.getElementById('hunt-ammo')?.value || '',
-        bulletWeight: document.getElementById('hunt-bullet-weight')?.value || '',
-        bowType: document.getElementById('hunt-bow-type')?.value || '',
-        arrowLength: document.getElementById('hunt-arrow-length')?.value || '',
-        arrowHead: document.getElementById('hunt-arrow-head')?.value || '',
-        distance: document.getElementById('hunt-distance').value,
-        distanceUnits: document.getElementById('hunt-distance-units').value,
-        setup: document.getElementById('hunt-setup').value,
-        companions: document.getElementById('hunt-companions').value,
-        gearUsed: document.getElementById('hunt-gear-used').value,
-        gearNeeded: document.getElementById('hunt-gear-needed').value,
-        notes: document.getElementById('hunt-notes').value
-    };
-
-    // Get existing hunts from localStorage
-    let hunts = JSON.parse(localStorage.getItem('hunts')) || [];
-    hunts.push(hunt);
-    localStorage.setItem('hunts', JSON.stringify(hunts));
-
-    // Redirect to dashboard
-    window.location.href = 'dashboard-list.html';
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // Function to load hunts from localStorage and display in dashboard-list.html
 function loadHunts() {
-    const huntList = document.getElementById('hunt-list');
-    if (!huntList) {
+    const $huntList = $('#hunt-list');
+    if ($huntList.length === 0) {
         return;
     }
 
     const hunts = JSON.parse(localStorage.getItem('hunts')) || [];
     
     // Get the create-new button
-    const createNew = document.getElementById('create-new');
+    const $createNew = $('#create-new');
     
-    // Append new hunts before the create-new button
+    // Clear existing hunt cards before adding new ones to prevent duplicates
+    $huntList.find('.hunt').remove();
+
+    // Append new hunts to the hunt list
     hunts.forEach((hunt, index) => {
-        const huntCard = document.createElement('a');
-        huntCard.href = 'details.html';
-        huntCard.className = 'hunt';
-        
         const harvestStatus = hunt.success ? 'Successful Harvest' : 'Unsuccessful Harvest';
         
-        huntCard.innerHTML = `
-            <div class="major-details">
-                <h2 class="hunt-title">${hunt.title || 'Untitled Hunt'}</h2>
-                <p class="harvest-status">${harvestStatus}</p>
-                <p class="hunt-date">${hunt.date || 'No date'}</p>
-                <p class="hunt-location">${hunt.location || 'No location'}</p>
-            </div>
-            <div class="featured-image">
-                <img src="images/new-hunt${index}.png" alt="Hunt ${index + 1}">
-                <img src="images/missing.png" alt="Hunt ${index + 1}">
-            </div>
-        `;
+        const $huntCard = $('<a>', {
+            href: 'details.html',
+            class: 'hunt',
+            html: `
+                <div class="major-details">
+                    <h2 class="hunt-title">${hunt.title || 'Untitled Hunt'}</h2>
+                    <p class="harvest-status">${harvestStatus}</p>
+                    <p class="hunt-date">${hunt.date || 'No date'}</p>
+                    <p class="hunt-location">${hunt.location || 'No location'}</p>
+                </div>
+                <div class="featured-image">
+                    <img src="images/hunt1.png" alt="Hunt ${index + 1}">
+                </div>
+            `
+        });
         
-        if (createNew) {
-            huntList.insertBefore(huntCard, createNew);
-        } else {
-            huntList.appendChild(huntCard);
+        $huntList.append($huntCard);
+    });
+
+    // Re-append the create-new button if it exists and was removed by .remove()
+    if ($createNew.length > 0) {
+        $huntList.append($createNew);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Function to handle logout button click
+function handleLogout() {
+    $('#logout-button').on('click', function() {
+        if (window.pb) {
+            window.pb.authStore.clear();
+        }
+        window.location.href = 'index.html';
+    });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Function to handle create new button click
+function handleCreateNew() {
+    $('#create-new-button').on('click', function() {
+        window.location.href = 'create.html';
+    });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Function to handle cancel button click
+function handleCancel() {
+    $('#cancel-button').on('click', function() {
+        window.location.href = 'dashboard-list.html';
+    });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Function to handle search form submission
+function handleSearchForm() {
+    $('#search-form').on('submit', function(e) {
+        e.preventDefault();
+        const searchQuery = $('#search-input').val();
+        if (searchQuery) {
+            window.location.href = 'search-results.html?search=' + encodeURIComponent(searchQuery);
         }
     });
 }

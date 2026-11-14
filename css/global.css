@@ -120,15 +120,55 @@ h2#slogan{
     margin: 10px;
 }
 
-div#login-center{
+div#login-center, #register-center{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 30% 10%;
+    margin: 5% 10%;
     flex-direction: column;
 }
 
-input#login-button {
+#login-box, #register-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    width: 300px;
+}
+
+#login-box input, #register-box input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#login-box button, #register-box button {
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#login-box button:hover, #register-box button:hover {
+    background-color: #1565C0;
+}
+
+.form-message {
+    color: red;
+    font-size: 14px;
+    margin: 0;
+}
+
+input#login-button, #register-button {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
@@ -159,6 +199,43 @@ main#content {
 #add-images-button,
 #add-map-button {
     width: fit-content;
+}
+
+.image-note {
+    font-size: 12px;
+    color: #666;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+.image-delete-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 8px;
+    display: none;
+}
+
+.image-delete-overlay::after {
+    content: '×';
+    font-size: 48px;
+    color: rgba(255, 0, 0, 0.8);
+    font-weight: bold;
+}
+
+.image-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.image-container.selected-for-delete img {
+    opacity: 0.5;
 }
 
 /*details.html*/
@@ -359,8 +436,10 @@ body.details-page main#content {
 }
 
 #hunt-images .featured-image {
-    width: auto;
-    height: auto;
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -385,7 +464,7 @@ body.details-page main#content {
 }
 
 .thumbnail {
-    flex: 1;
+    width: 100px;
     height: 80px;
     object-fit: cover;
     border-radius: 4px;
@@ -727,6 +806,22 @@ ul#footer-links li a:hover{
 /*****************/
 /**** GENERAL ****/
 /*****************/
+/* Status message styling as popup */
+#status {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    padding: 15px 25px;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    max-width: 300px;
+    text-align: center;
+    display: none;
+}
+
 /* Hide labels while remaining accessible for screen readers */
 .hidden {
     position: absolute;

@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script type="module" src="js/pb.js"></script>
+    <script type="module" src="js/list.js"></script>
 </head>
 <body>
 
@@ -31,7 +33,7 @@
 
       <div id="user-box">
         <button><img src="images/user.png" alt="User Icon">Ryan</button>
-        <button onclick="window.location.href = 'index.html';"><img src="images/logout.png" alt="Logout button"></button>
+        <button id="logout-button"><img src="images/logout.png" alt="Logout button"></button>
       </div>
     </nav>
 
@@ -61,45 +63,15 @@
 
   <main id="content">
 
+    <!-- Status message -->
+    <p id="status">Loading hunt logs…</p>
+
     <div id="hunt-list">
-      <a href="details.html" class="hunt">
-          <div class="major-details">
-            <h2 class="hunt-title">Deer Hunt</h2>
-            <p class="harvest-status">Successful Harvest </p>
-            <p class="hunt-date">December 3rd</p>
-            <p class="hunt-location">Woodhull, NY</p>
-        </div>
-          <div class="featured-image">
-            <img src="images/hunt1.png" alt="Hunt 1">
-          </div>
-      </a>
 
-      <a href="details.html" class="hunt">
-        <div class="major-details">
-          <h2 class="hunt-title">Deer Hunt</h2>
-          <p class="harvest-status">Unsuccessful Harvest </p>
-          <p class="hunt-date">September 14th</p>
-          <p class="hunt-location">Woodhull, NY</p>
-        </div>
-        <div class="featured-image">
-            <img src="images/hunt2.png" alt="Hunt 2">
-          </div>
-      </a>
-
-      <a href="details.html" class="hunt">
-        <div class="major-details">
-          <h2 class="hunt-title">Black Bear Hunt</h2>
-          <p class="harvest-status">Unsuccessful Harvest </p>
-          <p class="hunt-date">September 10th</p>
-          <p class="hunt-location">Woodhull, NY</p>
-        </div>
-        <div class="featured-image">
-          <img src="images/bear.png" alt="Hunt 3">
-        </div>
-      </a>
+      <!-- Filled in by list.js -->
 
       <div id="create-new">
-        <button onclick="window.location.href = 'create.html'" id="create-new-button"><img src="images/add.png" alt="Add new hunt"></button>
+        <button id="create-new-button"><img src="images/add.png" alt="Add new hunt"></button>
         <h3>Create New</h3>
       </div>
     </div> <!-- hunt-list -->

@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <title>Hunt Tracker</title>
     <link rel="stylesheet" type="text/css" href="css/global.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="js/scripts.js"></script>
+  <script type="module" src="js/pb.js"></script>
+  <script type="module" src="js/details.js"></script>
 </head>
 <body class="details-page">
 
@@ -29,7 +33,7 @@
 
       <div id="user-box">
         <button><img src="images/user.png" alt="User Icon">Ryan</button>
-        <button onclick="window.location.href = 'index.html';"><img src="images/logout.png" alt="Logout button"></button>
+        <button id="logout-button"><img src="images/logout.png" alt="Logout button"></button>
       </div>
     </nav>
 
@@ -52,26 +56,23 @@
     </div>
 
   <main id="content">
+    <!-- Status message -->
+    <p id="status">Loading Details…</p>
+
     <div id="hunt-definition">
       <div id="hunt-title-details">
-        <h2>Deer Hunt</h2>
-        <p class="harvest-status">Successful Harvest </p>
-        <p class="hunt-date">December 3rd, 2025 - Morning</p>
-        <p class="weather"><img src="images/sun.png" alt="Sun icon">43° Sunny - No wind</p>
-        <!-- Sun image from: https://www.istockphoto.com/illustrations/sun-clipart -->
-        <p class="hunt-location">Woodhull, NY</p>
+        <h2></h2>
+        <p class="harvest-status"></p>
+        <p class="hunt-date"></p>
+        <p class="weather"></p>
+        <p class="hunt-location"></p>
       </div> <!-- hunt-title-details-->
 
       <a href="edit.html" id="edit-button">Edit</a>
 
       <div id="hunt-images">
-        <img src="images/hunt1.png" alt="Hunt 1" class="featured-image">
+        <img src="" alt="Hunt Image" class="featured-image">
         <div class="thumbnail-row">
-          <img src="images/hunt2.png" alt="Hunt 2" class="thumbnail">
-          <img src="images/hunt3.png" alt="Hunt 3" class="thumbnail">
-          <img src="images/hunt4.png" alt="Hunt 4" class="thumbnail">
-          <img src="images/hunt5.png" alt="Hunt 5" class="thumbnail">
-          <img src="images/map1.png" alt="Hunt Map" class="thumbnail">
         </div>
       </div> <!-- hunt-images-->
     </div>
@@ -80,44 +81,44 @@
       <div id="details-column">
         <div class="form-row">
           <label for="game-species">Game Species:</label>
-          <input type="text" id="game-species" value="White-tail Deer" readonly>
+          <input type="text" id="game-species" readonly>
         </div>
         <div class="form-row">
           <label for="method">Method:</label>
-          <input type="text" id="method" value="Firearms" readonly>
+          <input type="text" id="method" readonly>
         </div>
         <div class="form-row">
           <label for="caliber">Caliber:</label>
-          <input type="text" id="caliber" value="308 Winchester" readonly>
+          <input type="text" id="caliber" readonly>
         </div>
         <div class="form-row">
           <label for="ammo">Ammo:</label>
-          <input type="text" id="ammo" value="Federal Fusion - 150 grain" readonly>
+          <input type="text" id="ammo" readonly>
         </div>
         <div class="form-row">
           <label for="distance">Distance:</label>
-          <input type="text" id="distance" value="150 yards" readonly>
+          <input type="text" id="distance" readonly>
         </div>
         <div class="form-row">
           <label for="setup">Setup:</label>
-          <input type="text" id="setup" value="Tree Stand" readonly>
+          <input type="text" id="setup" readonly>
         </div>
         <div class="form-row">
           <label for="companions">Companions:</label>
-          <input type="text" id="companions" value="None" readonly>
+          <input type="text" id="companions" readonly>
         </div>
         <div class="form-row">
           <label for="gear-used">Gear Used:</label>
-          <textarea readonly id="gear-used" placeholder="List gear used during the hunt">Parka; Binoculars; Range Finder; Scent Killer</textarea>
+          <textarea readonly id="gear-used"></textarea>
         </div>
         <div class="form-row">
           <label for="gear-needed">Gear Needed:</label>
-          <textarea readonly id="gear-needed" placeholder="List gear needed for the hunt">Bipod; Sling</textarea>
+          <textarea readonly id="gear-needed"></textarea>
         </div>
       </div>
       <div id="notes-column">
         <label for="notes">Notes:</label>
-        <textarea readonly id="notes" placeholder="This hunt was exciting as there were a ton of deer throughout the time we were out. Didn't get a shot on a buck until late in the morning, but it was a perfect shot that made for a short track."></textarea>
+        <textarea readonly id="notes"></textarea>
       </div>
       <div id="details-buttons"> <!-- Not currently implemented as there are only placeholder details for one hunt. -->
         <button id="previous-button">Previous</button>
