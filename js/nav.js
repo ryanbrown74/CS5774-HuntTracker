@@ -48,8 +48,8 @@ $(document).ready(function() {
     // Add search-form on specified pages
     if (shouldIncludeSearch) {
         navHTML += `
-      <form id="search-form" action="search-results.html" method="GET">
-        <input type="text" id="search-input" name="search" placeholder="deer">
+      <form id="search-form">
+        <input type="text" id="search-input" name="search" placeholder="Search">
         <button type="submit" id="search-button">Search</button>
       </form>
         `;

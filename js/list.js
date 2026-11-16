@@ -1,8 +1,16 @@
 import pb from './pb.js';
 
+// Access jQuery from global scope (loaded as regular script)
+const $ = window.$;
+
+// Store all hunt logs globally for filtering
+let allHuntLogs = [];
+
 $(document).ready(function() {
     console.log('list.js: DOM ready, loading hunt logs');
     loadHuntLogs();
+    handleSearchInput();
+    handleSearchSubmit();
 });
 
 function buildHuntLog(log) {
@@ -60,6 +68,9 @@ async function loadHuntLogs() {
             filter: filter
         });
 
+        // Store all hunt logs globally for filtering
+        allHuntLogs = huntLogs;
+
         console.log('list.js: fetched', huntLogs.length, 'hunt logs');
         console.log('list.js: $huntList length:', $huntList.length);
         console.log('list.js: $createNew length:', $createNew.length);
@@ -88,4 +99,57 @@ async function loadHuntLogs() {
             $status.text(`Could not load spots (error ${error.status}: ${error.message}).`);
         }
     }
+}
+
+//-----------------------------------------------------------------------------------
+
+function handleSearchInput() {
+    $(document).on('input', '#search-input', function() {
+        const searchText = $(this).val().toLowerCase();
+        filterHuntLogs(searchText);
+    });
+}
+
+function handleSearchSubmit() {
+    $(document).on('submit', '#search-form', function(e) {
+        e.preventDefault();
+        const searchText = $('#search-input').val().toLowerCase();
+        filterHuntLogs(searchText);
+    });
+}
+
+function filterHuntLogs(searchText) {
+    const $huntList = $('#hunt-list');
+    const $createNew = $('#create-new');
+    
+    // Remove existing hunt cards (but keep create-new)
+    $huntList.find('.hunt').remove();
+    
+    if (!searchText) {
+        // If search is empty, show all hunts
+        allHuntLogs.forEach(function(huntLog) {
+            const $huntCard = buildHuntLog(huntLog);
+            $huntList.prepend($huntCard);
+        });
+        return;
+    }
+    
+    // Filter hunts based on search text
+    const filteredHunts = allHuntLogs.filter(function(hunt) {
+        const title = (hunt.title || '').toLowerCase();
+        const location = (hunt.location || '').toLowerCase();
+        const game = (hunt.game || '').toLowerCase();
+        const date = (hunt.date || '').toLowerCase();
+        
+        return title.includes(searchText) || 
+               location.includes(searchText) || 
+               game.includes(searchText) ||
+               date.includes(searchText);
+    });
+    
+    // Display filtered hunts
+    filteredHunts.forEach(function(huntLog) {
+        const $huntCard = buildHuntLog(huntLog);
+        $huntList.prepend($huntCard);
+    });
 }
