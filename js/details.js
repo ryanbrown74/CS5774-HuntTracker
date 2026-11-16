@@ -6,8 +6,12 @@ import pb from './pb.js';
 // Access jQuery from global scope (loaded as regular script)
 const $ = window.$;
 
+let allHunts = [];
+let currentHuntIndex = -1;
+
 $(document).ready(function() {
     loadHuntDetails();
+    handlePreviousNextButtons();
 });
 
 async function loadHuntDetails() {
@@ -25,6 +29,25 @@ async function loadHuntDetails() {
         }
 
         console.log('Loading hunt details for ID:', huntId);
+
+        // Fetch all hunts from PocketBase (filtered by current user's email)
+        const userEmail = pb.authStore.model?.email;
+        const filter = userEmail ? `user_email="${userEmail}"` : '';
+        allHunts = await pb.collection('hunt_logs').getList(1, 100, {
+            filter: filter,
+            sort: '-date'
+        });
+        allHunts = allHunts.items;
+
+        // Find the current hunt's index
+        currentHuntIndex = allHunts.findIndex(hunt => hunt.id === huntId);
+
+        if (currentHuntIndex === -1) {
+            console.error('Hunt not found in user\'s hunts');
+            $status.text('Hunt not found').fadeIn(300);
+            setTimeout(() => $status.fadeOut(500), 2000);
+            return;
+        }
 
         // Fetch the specific hunt from PocketBase
         const hunt = await pb.collection('hunt_logs').getOne(huntId);
@@ -103,4 +126,24 @@ function populateHuntDetails(hunt) {
 
     // Notes
     $('#notes').val(hunt.notes || '');
+}
+
+function handlePreviousNextButtons() {
+    $('#previous-button').on('click', function() {
+        if (allHunts.length === 0) return;
+        
+        // Go to previous hunt (cycling to end if at beginning)
+        currentHuntIndex = currentHuntIndex <= 0 ? allHunts.length - 1 : currentHuntIndex - 1;
+        const nextHunt = allHunts[currentHuntIndex];
+        window.location.href = `details.html?id=${nextHunt.id}`;
+    });
+
+    $('#next-button').on('click', function() {
+        if (allHunts.length === 0) return;
+        
+        // Go to next hunt (cycling to beginning if at end)
+        currentHuntIndex = currentHuntIndex >= allHunts.length - 1 ? 0 : currentHuntIndex + 1;
+        const nextHunt = allHunts[currentHuntIndex];
+        window.location.href = `details.html?id=${nextHunt.id}`;
+    });
 }

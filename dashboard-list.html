@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>Hunt Tracker</title>
-    <link rel="stylesheet" type="text/css" href="css/global.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <script type="module" src="js/pb.js"></script>
-    <script type="module" src="js/list.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/global.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="module" src="js/pb.js"></script>
+  <script type="module" src="js/scripts.js"></script>
+  <script type="module" src="js/list.js"></script>
+  <script type="module" src="js/nav.js"></script>
+  <script type="module" src="js/filter.js"></script>
 </head>
 <body>
 
@@ -19,39 +21,12 @@
       <h1>Hunt Tracker</h1>
     </div><!-- #title-box -->
 
-    <nav id="nav">
-      <ul id="primary-nav">
-        <li><a href="#" class="selected">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-
-      <form id="search-form" action="search-results.html" method="GET">
-        <input type="text" id="search-input" name="search" placeholder="deer">
-        <button type="submit" id="search-button">Search</button>
-      </form>
-
-      <div id="user-box">
-        <button><img src="images/user.png" alt="User Icon">Ryan</button>
-        <button id="logout-button"><img src="images/logout.png" alt="Logout button"></button>
-      </div>
-    </nav>
+    <nav id="nav"></nav>
 
   </header><!-- #header -->
 
   <div id="year-bar">
-    <ul id="year-list">
-      <li><a href="?year=2017">2017</a></li>
-      <li><a href="?year=2018">2018</a></li>
-      <li><a href="?year=2019">2019</a></li>
-      <li><a href="?year=2020">2020</a></li>
-      <li><a href="?year=2021">2021</a></li>
-      <li><a href="?year=2022">2022</a></li>
-      <li><a href="?year=2023">2023</a></li>
-      <li><a href="?year=2024">2024</a></li>
-      <li><a href="?year=2025" class="selected">2025</a></li>
-      <li><a href="?year=all">All</a></li>
-    </ul>
+    <ul id="year-list"></ul>
   </div>
 
   <div id="view-bar">

@@ -19,6 +19,7 @@ function handleSave() {
 
         // Collect form data - only include non-empty values
         const huntData = {
+            user_email: pb.authStore.model?.email,
             title: $('#hunt-title').val(),
             successful: $('#hunt-success').is(':checked'),
             date: $('#hunt-date').val(),

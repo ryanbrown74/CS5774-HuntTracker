@@ -44,7 +44,21 @@ async function loadHuntLogs() {
 
         console.log('list.js: fetching hunt logs from PocketBase');
 
-        const huntLogs = await pb.collection('hunt_logs').getFullList({ sort: 'date' });
+        // Check if a year filter is applied via URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedYear = urlParams.get('year');
+
+        let filter = '';
+        if (selectedYear && selectedYear !== 'all') {
+            // Filter by year
+            filter = `date >= "${selectedYear}-01-01" && date <= "${selectedYear}-12-31"`;
+        }
+
+        const huntLogs = await pb.collection('hunt_logs').getFullList({ 
+            sort: 'date',
+            requestKey: 'list-hunt-logs',
+            filter: filter
+        });
 
         console.log('list.js: fetched', huntLogs.length, 'hunt logs');
         console.log('list.js: $huntList length:', $huntList.length);
