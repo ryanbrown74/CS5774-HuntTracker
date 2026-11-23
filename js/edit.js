@@ -87,6 +87,17 @@ function populateForm(hunt) {
     $('#hunt-gear-needed').val(hunt.gear_needed || '');
     $('#hunt-notes').val(hunt.notes || '');
 
+    // Populate map fields
+    if (hunt.geoPoint && hunt.geoPoint.lat && hunt.geoPoint.lon) {
+        $('#hunt-lat').val(hunt.geoPoint.lat);
+        $('#hunt-long').val(hunt.geoPoint.lon);
+        // Trigger input event to update map
+        $('#hunt-lat, #hunt-long').trigger('input');
+    }
+    if (hunt.radius) {
+        $('#hunt-radius').val(hunt.radius);
+    }
+
     // Store existing images
     existingImages = hunt.images || [];
 
@@ -131,7 +142,12 @@ function handleSave() {
             companions: $('#hunt-companions').val(),
             gear_used: $('#hunt-gear-used').val(),
             gear_needed: $('#hunt-gear-needed').val(),
-            notes: $('#hunt-notes').val()
+            notes: $('#hunt-notes').val(),
+            geoPoint: {
+                lat: parseFloat($('#hunt-lat').val()) || 0,
+                lon: parseFloat($('#hunt-long').val()) || 0
+            },
+            radius: parseInt($('#hunt-radius').val()) || 100
         };
 
         // Remove empty string values to avoid validation errors

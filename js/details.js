@@ -8,6 +8,7 @@ const $ = window.$;
 
 let allHunts = [];
 let currentHuntIndex = -1;
+let detailsMap = null;
 
 $(document).ready(function() {
     loadHuntDetails();
@@ -126,6 +127,63 @@ function populateHuntDetails(hunt) {
 
     // Notes
     $('#notes').val(hunt.notes || '');
+
+    // Initialize map with hunt coordinates
+    initDetailsMap(hunt);
+}
+
+function initDetailsMap(hunt) {
+    // Only initialize if geoPoint exists
+    if (!hunt.geoPoint || !hunt.geoPoint.lat || !hunt.geoPoint.lon) {
+        $('#details-map').hide();
+        return;
+    }
+
+    const lat = parseFloat(hunt.geoPoint.lat);
+    const lng = parseFloat(hunt.geoPoint.lon);
+
+    // Validate coordinates
+    if (isNaN(lat) || isNaN(lng) || (lat === 0 && lng === 0)) {
+        $('#details-map').hide();
+        return;
+    }
+
+    // Check if Leaflet is loaded
+    if (typeof L === 'undefined') {
+        console.error('Leaflet library not loaded');
+        $('#details-map').hide();
+        return;
+    }
+
+    // Initialize map centered on hunt coordinates
+    detailsMap = L.map('details-map', {
+        dragging: true,
+        scrollWheelZoom: true,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        touchZoom: false
+    }).setView([lat, lng], 14);
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(detailsMap);
+
+    // Add marker at hunt coordinates
+    L.marker([lat, lng]).addTo(detailsMap);
+
+    // Add circle if radius exists
+    if (hunt.radius) {
+        const radiusMeters = hunt.radius * 0.9144;
+        L.circle([lat, lng], {
+            radius: radiusMeters,
+            color: 'black',
+            fillColor: 'rgba(0, 0, 0, 0.1)',
+            fillOpacity: 0.3,
+            weight: 2
+        }).addTo(detailsMap);
+    }
 }
 
 function handlePreviousNextButtons() {

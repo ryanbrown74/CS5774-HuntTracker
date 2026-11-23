@@ -4,10 +4,13 @@
   <meta charset="utf-8">
   <title>Hunt Tracker - Edit Hunt</title>
   <link rel="stylesheet" type="text/css" href="css/global.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module" src="js/pb.js"></script>
   <script type="module" src="js/scripts.js"></script>
   <script type="module" src="js/edit.js"></script>
+  <script type="module" src="js/create-map.js"></script>
   <script type="module" src="js/nav.js"></script>
 </head>
 <body>
@@ -259,7 +262,19 @@
       <div id="hunt-images"></div>
 
       <button id="add-map-button">Add Map</button>
-      <div id="added-map"></div>
+      <div id="added-map">
+        <div id="create-map"></div>
+        <div class="form-row">
+          <label for="hunt-lat">Lat:</label>
+          <input type="text" id="hunt-lat" name="hunt-lat">
+          <label for="hunt-long">Long:</label>
+          <input type="text" id="hunt-long" name="hunt-long">
+        </div>
+        <div class="form-row">
+          <label for="hunt-radius">Radius:</label>
+          <input type="number" id="hunt-radius" name="hunt-radius" value="100" min="10" max="2000">
+        </div>
+      </div>
     </div> <!-- images-and-map-column -->
 
   </main> <!-- content -->

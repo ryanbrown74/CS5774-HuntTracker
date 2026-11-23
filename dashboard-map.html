@@ -42,26 +42,19 @@
     <!-- Map view contains an interactive map with markers.
          The map is initialized by map.js.-->
     <div id="map-container">
-      <button onclick="window.location.href = 'create.html'" class="add-new-map-button">Create new</button>
+      <button id="create-new-map-button" class="add-new-map-button">Create new</button>
       <div id="map"></div>
+      <div id="radius-popup" class="radius-popup" style="display: none;">
+        <label for="radius-slider">Radius</label>
+        <input type="range" id="radius-slider" min="10" max="2000" value="100" step="10">
+        <span id="radius-value">100 yards</span>
+        <button id="create-hunt-button">Create</button>
+      </div>
     </div>
-
-<!--    <div id="selected-hunt-placeholder">-->
-<!--      <p>Select a hunt on the map.</p>-->
-<!--    </div>-->
 
     <div class="selected-map-hunt" >
       <h2 class="placeholder-selected-hunt"> Select a hunt on the map</h2>
     </div>
-
-<!--    <a class="selected-map-hunt">-->
-<!--          <div class="major-details">-->
-<!--            <h2 class="hunt-title">Deer Hunt</h2>-->
-<!--            <p class="harvest-status">Successful Harvest </p>-->
-<!--            <p class="hunt-date">December 3rd</p>-->
-<!--            <p class="hunt-location">Woodhull, NY</p>-->
-<!--          </div>-->
-<!--      </a>-->
 
   </main> <!-- content -->
 

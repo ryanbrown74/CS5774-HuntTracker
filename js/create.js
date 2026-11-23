@@ -43,7 +43,12 @@ function handleSave() {
             companions: $('#hunt-companions').val(),
             gear_used: $('#hunt-gear-used').val(),
             gear_needed: $('#hunt-gear-needed').val(),
-            notes: $('#hunt-notes').val()
+            notes: $('#hunt-notes').val(),
+            geoPoint: {
+                lat: parseFloat($('#hunt-lat').val()) || 0,
+                lon: parseFloat($('#hunt-long').val()) || 0
+            },
+            radius: parseInt($('#hunt-radius').val()) || 100
         };
 
         // Remove empty string values to avoid validation errors
