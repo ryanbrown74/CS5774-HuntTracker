@@ -61,6 +61,12 @@ div#user-box{
     float: right;
 }
 
+.user-greeting {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
 div#no-results{
     display: none;
     margin : 20px;

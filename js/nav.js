@@ -57,9 +57,10 @@ $(document).ready(function() {
 
     // Add user-box on specified pages when logged in
     if (shouldIncludeUserBox) {
+        const userName = pb.authStore.model?.name || pb.authStore.model?.email || 'User';
         navHTML += `
       <div id="user-box">
-        <button><img src="images/user.png" alt="User Icon">Ryan</button>
+        <span class="user-greeting">Hi, ${userName}</span>
         <button id="logout-button"><img src="images/logout.png" alt="Logout button"></button>
       </div>
         `;
