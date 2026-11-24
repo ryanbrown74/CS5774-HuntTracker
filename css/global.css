@@ -1,5 +1,4 @@
 html, body{
-    /*height: 100%;*/
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -71,7 +70,6 @@ div#no-results{
     display: none;
     margin : 20px;
 }
-
 
 #search-form {
     display: flex;
@@ -185,7 +183,6 @@ main#content {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    /*padding: 20px;*/
     align-items: flex-start;
 }
 

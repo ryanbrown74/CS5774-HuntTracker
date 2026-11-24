@@ -8,14 +8,48 @@ const $ = window.$;
 
 $(document).ready(function() {
     handleSave();
+    handleCancel();
     handleImageUpload();
 });
 
 let uploadedImages = [];
 
+function handleCancel() {
+    $('#cancel-button').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'dashboard-list.html';
+    });
+}
+
 function handleSave() {
     $('#save-button').on('click', async function(e) {
         e.preventDefault();
+
+        // Validate coordinates
+        const lat = parseFloat($('#hunt-lat').val());
+        const lng = parseFloat($('#hunt-long').val());
+        
+        if (isNaN(lat) || isNaN(lng)) {
+            alert('Please enter valid latitude and longitude coordinates before saving.');
+            return;
+        }
+        
+        if (lat < -90 || lat > 90) {
+            alert('Latitude must be between -90 and 90 degrees.');
+            return;
+        }
+        
+        if (lng < -180 || lng > 180) {
+            alert('Longitude must be between -180 and 180 degrees.');
+            return;
+        }
+        
+        // Validate radius
+        const radius = parseInt($('#hunt-radius').val());
+        if (isNaN(radius) || radius < 10 || radius > 2000) {
+            alert('Radius must be between 10 and 2000 yards.');
+            return;
+        }
 
         // Collect form data - only include non-empty values
         const huntData = {
@@ -45,10 +79,10 @@ function handleSave() {
             gear_needed: $('#hunt-gear-needed').val(),
             notes: $('#hunt-notes').val(),
             geoPoint: {
-                lat: parseFloat($('#hunt-lat').val()) || 0,
-                lon: parseFloat($('#hunt-long').val()) || 0
+                lat: lat,
+                lon: lng
             },
-            radius: parseInt($('#hunt-radius').val()) || 100
+            radius: radius
         };
 
         // Remove empty string values to avoid validation errors
@@ -57,8 +91,6 @@ function handleSave() {
                 delete huntData[key];
             }
         });
-
-        console.log('Creating hunt with data:', huntData);
 
         try {
             // Create new hunt log in PocketBase with images if any
@@ -70,17 +102,13 @@ function handleSave() {
                     images: uploadedImages
                 };
                 record = await pb.collection('hunt_logs').create(dataWithImages);
-                console.log('data with images:', dataWithImages)
             } else {
                 record = await pb.collection('hunt_logs').create(huntData);
             }
-            console.log('Hunt created successfully:', record);
 
             // Redirect to details page with the new hunt's ID
             window.location.href = `details.html?id=${record.id}`;
         } catch (error) {
-            console.error('Error creating hunt:', error);
-            console.error('Error details:', error.data);
             alert(`Failed to create hunt: ${error.message}`);
         }
     });

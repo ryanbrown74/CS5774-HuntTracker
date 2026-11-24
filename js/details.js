@@ -23,13 +23,10 @@ async function loadHuntDetails() {
         const huntId = urlParams.get('id');
 
         if (!huntId) {
-            console.error('No hunt ID provided in URL');
             $status.text('No hunt ID provided in URL').fadeIn(300);
             setTimeout(() => $status.fadeOut(500), 2000);
             return;
         }
-
-        console.log('Loading hunt details for ID:', huntId);
 
         // Fetch all hunts from PocketBase (filtered by current user's email)
         const userEmail = pb.authStore.model?.email;
@@ -44,7 +41,6 @@ async function loadHuntDetails() {
         currentHuntIndex = allHunts.findIndex(hunt => hunt.id === huntId);
 
         if (currentHuntIndex === -1) {
-            console.error('Hunt not found in user\'s hunts');
             $status.text('Hunt not found').fadeIn(300);
             setTimeout(() => $status.fadeOut(500), 2000);
             return;
@@ -53,15 +49,12 @@ async function loadHuntDetails() {
         // Fetch the specific hunt from PocketBase
         const hunt = await pb.collection('hunt_logs').getOne(huntId);
 
-        console.log('Hunt loaded:', hunt);
-
         $status.text('Details loaded').fadeIn(300);
         setTimeout(() => $status.fadeOut(500), 2000);
 
         // Populate the details page with hunt data
         populateHuntDetails(hunt);
     } catch (error) {
-        console.error('Error loading hunt details:', error);
         if (error.status === 0) {
             $status.text('Cannot reach the server. Is ./pocketbase serve running?');
         } else {
@@ -150,7 +143,6 @@ function initDetailsMap(hunt) {
 
     // Check if Leaflet is loaded
     if (typeof L === 'undefined') {
-        console.error('Leaflet library not loaded');
         $('#details-map').hide();
         return;
     }

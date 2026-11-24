@@ -27,24 +27,20 @@ async function loadHuntForEdit() {
         const huntId = urlParams.get('id');
 
         if (!huntId) {
-            console.error('No hunt ID provided in URL');
             alert('No hunt ID provided');
             window.location.href = 'dashboard-list.html';
             return;
         }
 
         currentHuntId = huntId;
-        console.log('Loading hunt for edit with ID:', huntId);
 
         // Fetch the specific hunt from PocketBase
         const hunt = await pb.collection('hunt_logs').getOne(huntId);
         window.hunt = hunt;
-        console.log('Hunt loaded for edit:', hunt);
 
         // Populate the form with hunt data
         populateForm(hunt);
     } catch (error) {
-        console.error('Error loading hunt for edit:', error);
         alert('Failed to load hunt. Please try again.');
         window.location.href = 'dashboard-list.html';
     }
@@ -117,6 +113,32 @@ function handleSave() {
             return;
         }
 
+        // Validate coordinates
+        const lat = parseFloat($('#hunt-lat').val());
+        const lng = parseFloat($('#hunt-long').val());
+        
+        if (isNaN(lat) || isNaN(lng)) {
+            alert('Please enter valid latitude and longitude coordinates before saving.');
+            return;
+        }
+        
+        if (lat < -90 || lat > 90) {
+            alert('Latitude must be between -90 and 90 degrees.');
+            return;
+        }
+        
+        if (lng < -180 || lng > 180) {
+            alert('Longitude must be between -180 and 180 degrees.');
+            return;
+        }
+        
+        // Validate radius
+        const radius = parseInt($('#hunt-radius').val());
+        if (isNaN(radius) || radius < 10 || radius > 2000) {
+            alert('Radius must be between 10 and 2000 yards.');
+            return;
+        }
+
         // Collect form data
         const huntData = {
             title: $('#hunt-title').val(),
@@ -144,10 +166,10 @@ function handleSave() {
             gear_needed: $('#hunt-gear-needed').val(),
             notes: $('#hunt-notes').val(),
             geoPoint: {
-                lat: parseFloat($('#hunt-lat').val()) || 0,
-                lon: parseFloat($('#hunt-long').val()) || 0
+                lat: lat,
+                lon: lng
             },
-            radius: parseInt($('#hunt-radius').val()) || 100
+            radius: radius
         };
 
         // Remove empty string values to avoid validation errors
@@ -156,8 +178,6 @@ function handleSave() {
                 delete huntData[key];
             }
         });
-
-        console.log('Updating hunt with data:', huntData);
 
         try {
             // Update the hunt log in PocketBase with images if any
@@ -176,17 +196,13 @@ function handleSave() {
 
             if (imagesToDelete.length > 0 || uploadedImages.length > 0) {
                 record = await pb.collection('hunt_logs').update(currentHuntId, updateData);
-                console.log('Saving with image changes:', updateData);
             } else {
                 record = await pb.collection('hunt_logs').update(currentHuntId, huntData);
-                console.log('Saving without image changes');
             }
-            console.log('Hunt updated successfully:', record);
 
             // Redirect to dashboard
             window.location.href = `details.html?id=${record.id}`;
         } catch (error) {
-            console.error('Error updating hunt:', error);
             alert('Failed to update hunt. Please try again.');
         }
     });
@@ -211,12 +227,10 @@ function handleDelete() {
         if (confirm('Are you sure you want to delete this hunt?')) {
             try {
                 await pb.collection('hunt_logs').delete(currentHuntId);
-                console.log('Hunt deleted successfully');
 
                 // Redirect to dashboard
                 window.location.href = 'dashboard-list.html';
             } catch (error) {
-                console.error('Error deleting hunt:', error);
                 alert('Failed to delete hunt. Please try again.');
             }
         }

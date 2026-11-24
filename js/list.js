@@ -7,7 +7,6 @@ const $ = window.$;
 let allHuntLogs = [];
 
 $(document).ready(function() {
-    console.log('list.js: DOM ready, loading hunt logs');
     loadHuntLogs();
     handleSearchInput();
     handleSearchSubmit();
@@ -44,13 +43,10 @@ function buildHuntLog(log) {
 //-----------------------------------------------------------------------------------
 
 async function loadHuntLogs() {
-    console.log('list.js: loadHuntLogs called');
     const $status = $('#status');
     try {
         const $huntList = $('#hunt-list');
         const $createNew = $('#create-new');
-
-        console.log('list.js: fetching hunt logs from PocketBase');
 
         // Check if a year filter is applied via URL parameter
         const urlParams = new URLSearchParams(window.location.search);
@@ -71,10 +67,6 @@ async function loadHuntLogs() {
         // Store all hunt logs globally for filtering
         allHuntLogs = huntLogs;
 
-        console.log('list.js: fetched', huntLogs.length, 'hunt logs');
-        console.log('list.js: $huntList length:', $huntList.length);
-        console.log('list.js: $createNew length:', $createNew.length);
-
         if(huntLogs.length === 0) {
             $status.text('No hunt logs yet.').fadeIn(300);
             setTimeout(() => $status.fadeOut(500), 1500);
@@ -89,10 +81,7 @@ async function loadHuntLogs() {
             const $huntCard = buildHuntLog(huntLog);
             $huntList.prepend($huntCard);
         });
-        console.log('list.js: hunt logs appended to DOM');
-        console.log('list.js: #create-new still in DOM:', $('#create-new').length);
     } catch (error) {
-        console.error('list.js: Error loading hunt logs:', error);
         if (error.status === 0) {
             $status.text('Cannot reach the server. Is ./pocketbase serve running?');
         } else {

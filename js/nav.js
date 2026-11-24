@@ -19,8 +19,12 @@ $(document).ready(function() {
     ];
 
     // Get current page filename
-    const currentPage = window.location.pathname.split('/').pop() || 'dashboard-list.html';
-    const shouldIncludeSearch = pagesWithSearch.includes(currentPage);
+    let currentPage = window.location.pathname.split('/').pop() || 'dashboard-list.html';
+    // If pathname is just '/' or ends with '/', treat as index.html
+    if (window.location.pathname === '/' || window.location.pathname.endsWith('/')) {
+        currentPage = 'index.html';
+    }
+    const shouldIncludeSearch = pagesWithSearch.includes(currentPage) && currentPage !== 'index.html';
     const shouldIncludeUserBox = isLoggedIn;
 
     // Determine which page is active for highlighting

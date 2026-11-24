@@ -162,9 +162,25 @@ async function loadHuntMarkers() {
             requestKey: 'map-hunt-markers'
         });
 
+        // Get selected year from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedYear = urlParams.get('year');
+
         const bounds = [];
 
         hunts.forEach(function(hunt) {
+            // Filter by year if a specific year is selected
+            if (selectedYear && selectedYear !== 'all') {
+                if (hunt.date) {
+                    const huntYear = new Date(hunt.date).getFullYear();
+                    if (huntYear.toString() !== selectedYear) {
+                        return; // Skip this hunt
+                    }
+                } else {
+                    return; // Skip hunts without dates when filtering by year
+                }
+            }
+
             if (hunt.geoPoint && hunt.geoPoint.lat && hunt.geoPoint.lon) {
                 const latlng = [parseFloat(hunt.geoPoint.lat), parseFloat(hunt.geoPoint.lon)];
                 
